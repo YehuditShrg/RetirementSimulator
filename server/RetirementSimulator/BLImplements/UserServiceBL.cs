@@ -95,7 +95,7 @@ public class UserServiceBL : IUserServiceBL
             UserDTO u = new UserDTO() { Password = pas };
             var filter = Builders<User>.Filter.Eq("Email", email);
             User theUser = userService.GetAsync(filter).Result;
-            if (Auth.VerifyPassword(pas, theUser.Password))
+            if (Auth.VerifyPassword(pas,theUser.Password))
             {
                 if (theUser.SubscriptionPeriodDate <= DateTime.Now)
                 {
