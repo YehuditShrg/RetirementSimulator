@@ -1,22 +1,12 @@
-﻿using BL;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using UI;
+using BL;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.MyAddAuthentication(builder.Configuration);
 
 builder.Services.AddControllers();
 builder.Services.AddServices(/*builder.Configuration*/);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMvc();
-
-// 👇 Configuring the Authorization Service
-builder.Services.AddAuthorization();
-
 
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();
@@ -47,11 +37,8 @@ app.UseHttpsRedirection();
 
 app.UseCors();
 
-app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
-
